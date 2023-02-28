@@ -1,0 +1,23 @@
+{
+  "name": "demo-bank-cypress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "runner": "cypress open --e2e --browser chrome"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pawel-Albert/demo-bank-cypress.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pawel-Albert/demo-bank-cypress/issues"
+  },
+  "homepage": "https://github.com/Pawel-Albert/demo-bank-cypress#readme",
+  "devDependencies": {
+    "cypress": "^12.7.0",
+    "typescript": "^4.9.5"
+  }
+}
