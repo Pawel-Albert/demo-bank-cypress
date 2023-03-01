@@ -4,7 +4,6 @@ const LOGIN_SUBMIT_BUTTON = '[data-testid="login-button"]'
 const LOGIN_TOOLTIP = '[data-id=login_id] + div .login-tooltip i'
 const PASSWORD_TOOLTIP = '.login-tooltip-wrapper  [data-id=login_password] i'
 const TOOLTIP_TEXT = '.ui-tooltip-content'
-const TOOLTIP_TEXT2 = '.ui-tooltip-content'
 
 const getLoginInput = () => cy.get(LOGIN_INPUT)
 const getPasswordInput = () => cy.get(PASSWORD_INPUT)
@@ -12,7 +11,6 @@ const getLoginButton = () => cy.get(LOGIN_SUBMIT_BUTTON)
 const getLoginTooltip = () => cy.get(LOGIN_TOOLTIP)
 const getPasswordTooltip = () => cy.get(PASSWORD_TOOLTIP)
 const getTooltipText = () => cy.get(TOOLTIP_TEXT)
-const getTooltipText2 = () => cy.get(TOOLTIP_TEXT2)
 
 type LoginPage = {
   openLoginPage: (url: string) => void
@@ -21,7 +19,6 @@ type LoginPage = {
   checkTitle: (expectedTitle: string) => void
   checkUrl: (expectedURL: string) => void
   assertions: {
-    containsWelcomeMessage: () => void
     hasUsernameValue: (username: string) => void
     hasPasswordValue: (password: string) => void
     isSubmitButtonEnabled: (isEnabled: boolean) => void
@@ -60,7 +57,6 @@ export const LoginPage = (): LoginPage => {
     checkTitle,
     checkUrl,
     assertions: {
-      containsWelcomeMessage: () => cy.contains('Welcome, user!'),
       hasUsernameValue: username => getLoginInput().should('have.value', username),
       hasPasswordValue: password => getPasswordInput().should('have.value', password),
       isSubmitButtonEnabled: isEnabled => getLoginButton().should(isEnabled ? 'be.enabled' : 'be.disabled'),
@@ -83,7 +79,7 @@ export const LoginPage = (): LoginPage => {
       },
       hasPasswordTooltipText: expectedText => {
         getPasswordTooltip().realHover()
-        getTooltipText2()
+        getTooltipText()
           .wait(500)
           .should($tooltip => {
             expect($tooltip.get(0).innerText).to.eq(expectedText)
