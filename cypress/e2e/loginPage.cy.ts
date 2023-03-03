@@ -1,10 +1,10 @@
-import {LoginPage} from '../model/model.loginPage.cy'
+import {createLoginPage} from '../model/model.loginPage.cy'
 import {validCredentials, invalidCredentials, borderColors, tooltipText} from '../fixtures/data.loginPage'
 
 describe('Login Page validation', () => {
-  const loginPage = LoginPage()
+  const loginPage = createLoginPage()
   beforeEach(() => {
-    loginPage.openLoginPage('/')
+    loginPage.openPage('/')
   })
   it('Static elements validation', () => {
     loginPage.checkUrl(Cypress.config().baseUrl)
@@ -40,8 +40,8 @@ describe('Login Page validation', () => {
   })
 
   it('Login inputs validation - empty inputs', () => {
-    loginPage.assertions.clearLoginInput()
-    loginPage.assertions.clearPasswordInput()
+    loginPage.clearLoginInput()
+    loginPage.clearPasswordInput()
     loginPage.assertions.hasLoginInputBorderColor(borderColors.invalidRed)
     loginPage.assertions.hasPasswordInputBorderColor(borderColors.invalidRed)
   })
