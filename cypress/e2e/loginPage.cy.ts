@@ -1,5 +1,6 @@
 import {createLoginPage} from '../model/model.loginPage.cy'
-import {validCredentials, invalidCredentials, borderColors, tooltipText} from '../fixtures/data.loginPage'
+import * as loginPageData from '../fixtures/data.loginPage'
+import {borderColors} from '../fixtures/data.general'
 
 describe('Login Page validation', () => {
   const loginPage = createLoginPage()
@@ -8,29 +9,29 @@ describe('Login Page validation', () => {
   })
   it('Static elements validation', () => {
     loginPage.checkUrl(Cypress.config().baseUrl)
-    loginPage.checkTitle('Demobank - Bankowość Internetowa - Logowanie')
+    loginPage.checkTitle(loginPageData.pageTitle)
   })
 
   it('Tooltip - login input', {retries: 2}, () => {
-    loginPage.assertions.hasLoginTooltipText(tooltipText.login)
+    loginPage.assertions.hasLoginTooltipText(loginPageData.tooltipText.login)
   })
 
   it('Tooltip - password input', {retries: 2}, () => {
-    loginPage.assertions.hasPasswordTooltipText(tooltipText.password)
+    loginPage.assertions.hasPasswordTooltipText(loginPageData.tooltipText.password)
   })
 
   it('Login inputs validation - valid credentials', () => {
     loginPage.assertions.isSubmitButtonEnabled(false)
-    loginPage.fillForm(validCredentials.userName, validCredentials.password)
-    loginPage.assertions.hasPasswordValue(validCredentials.password)
-    loginPage.assertions.hasUsernameValue(validCredentials.userName)
+    loginPage.fillForm(loginPageData.validCredentials.userName, loginPageData.validCredentials.password)
+    loginPage.assertions.hasPasswordValue(loginPageData.validCredentials.password)
+    loginPage.assertions.hasUsernameValue(loginPageData.validCredentials.userName)
     loginPage.assertions.hasLoginInputBorderColor(borderColors.validGreen)
     loginPage.assertions.hasPasswordInputBorderColor(borderColors.validGreen)
     loginPage.assertions.isSubmitButtonEnabled(true)
   })
 
-  const numberOfIterations = invalidCredentials.length
-  invalidCredentials.forEach((data, index) => {
+  const numberOfIterations = loginPageData.invalidCredentials.length
+  loginPageData.invalidCredentials.forEach((data, index) => {
     it(`Login inputs validation - invalid credentials - ${index + 1}/${numberOfIterations}`, () => {
       loginPage.fillForm(data.userName, data.password)
       loginPage.assertions.hasLoginInputBorderColor(borderColors.invalidRed)
@@ -47,7 +48,7 @@ describe('Login Page validation', () => {
   })
 
   it('Login with valid credentials', () => {
-    loginPage.fillForm(validCredentials.userName, validCredentials.password)
+    loginPage.fillForm(loginPageData.validCredentials.userName, loginPageData.validCredentials.password)
     loginPage.submitForm()
     loginPage.checkUrl(Cypress.config().baseUrl + 'pulpit.html')
     loginPage.checkTitle('Demobank - Bankowość Internetowa - Pulpit')
