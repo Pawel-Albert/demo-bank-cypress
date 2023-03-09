@@ -20,4 +20,24 @@ describe('Pulpit base validation', () => {
     pulpitPage.checkUrl(Cypress.config().baseUrl + 'pulpit.html')
     pulpitPage.checkTitle(pulpitPageData.pageTitle)
   })
+
+  it('Session time displayed', () => {
+    pulpitPage.assertions.hasSessionTime()
+  })
+
+  it('Balance is displayed', () => {
+    pulpitPage.assertions.hasBalance()
+  })
+
+  it('Side menu is displayed - fast payments', () => {
+    pulpitPage.clickFastPaymentSideBar()
+  })
+
+  it('Side menu is displayed - main dashboard', () => {
+    pulpitPage.clickMainDashboardSideBar()
+  })
+
+  it('Side menu is displayed - personal accounts', () => {
+    pulpitPage.clickPersonalAccountsSideBar()
+  })
 })
