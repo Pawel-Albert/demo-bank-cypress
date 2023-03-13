@@ -3,3 +3,5 @@ export const borderColors = {
   validGreen: 'rgb(4, 180, 62)',
   invalidRed: 'rgb(212, 32, 39)'
 }
+
+export const activeTextColor = 'rgb(218, 0, 39)'
